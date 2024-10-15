@@ -6,6 +6,7 @@ on:
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: dice-game
+  PROJECT_PATH: .
 
 permissions:
   contents: read
