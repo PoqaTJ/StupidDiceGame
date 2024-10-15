@@ -21,7 +21,7 @@ jobs:
         uses: manleydev/build-godot-action@v1.5.0
         with:
           name: example
-          preset: web
+          preset: Web
           debugMode: "true"
 
       - name: Upload artifact
