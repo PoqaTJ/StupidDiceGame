@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="DiceGame"
-run/main_scene="res://dice_set.tscn"
+run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [rendering]
 
