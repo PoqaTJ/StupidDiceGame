@@ -37,6 +37,7 @@ jobs:
           path: web
 
   deploy:
+    name: Deploy to Github Pages
     needs: export-web
     environment:
       name: github-pages
