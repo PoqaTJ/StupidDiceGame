@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwudxghd8qys4"]
+
+[ext_resource type="Script" path="res://scripts/dice/dice_set.gd" id="1_byw8l"]
+[ext_resource type="PackedScene" uid="uid://841tgoqviom5" path="res://die.tscn" id="2_heuyj"]
+
+[node name="dice_set" type="Node2D"]
+script = ExtResource("1_byw8l")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 12.74
+offset_right = 212.74
+offset_bottom = 50.0
+
+[node name="d4" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(15.26, 0)
+
+[node name="d6" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(40.26, 0)
+
+[node name="d8" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(65.26, 0)
+
+[node name="d10" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(90.26, 0)
+
+[node name="d12" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(115.26, 0)
+
+[node name="d20" parent="HBoxContainer" instance=ExtResource("2_heuyj")]
+position = Vector2(140.26, 0)
