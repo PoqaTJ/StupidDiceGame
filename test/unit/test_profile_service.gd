@@ -1,9 +1,9 @@
 extends GutTest
 
-class TestGet:
+class TestPoints:
 	extends GutTest
 	
-	var profileScript = load('res://scripts/managers/profile_manager.gd')		
+	var profileScript = load('res://scripts/services/profile_service.gd')		
 	var profile
 
 	func before_each():
@@ -19,32 +19,22 @@ class TestGet:
 		profile.points = 10
 		assert_true(profile.get_points() == 10)
 		assert_true(profile.get_points() ==  profile.points)
-
-
-class TestAdd:
-	extends GutTest
-
-	var profileScript = load('res://scripts/managers/profile_manager.gd')		
-	var profile
-
-	func before_each():
-		profile = profileScript.new()
 	
 	func test_add():
-		assert_eq(profile.get_points(), 0)
+		assert_eq(0, profile.get_points())
 		profile.add_points(1)
-		assert_eq(profile.get_points(), 1)
+		assert_eq(1, profile.get_points())
 		profile.add_points(100)
-		assert_eq(profile.get_points(), 101)
+		assert_eq(101, profile.get_points())
 	
 	func test_add_zero():
 		profile.add_points(0)
-		assert_eq(profile.get_points(), 0)		
+		assert_eq(0, profile.get_points())		
 		profile.add_points(-1)
-		assert_eq(profile.get_points(), 0)
+		assert_eq(0, profile.get_points())
 	
 	func test_has_points():
-		assert_eq(profile.get_points(), 0)
+		assert_eq(0, profile.get_points())
 		assert_false(profile.has_points(1))
 		profile.add_points(5)
 		assert_true(profile.has_points(1))
@@ -54,8 +44,49 @@ class TestAdd:
 	func test_spend_points():
 		profile.add_points(5)
 		assert_true(profile.spend_points(1))
-		assert_eq(profile.get_points(), 4)
+		assert_eq(4, profile.get_points())
 		assert_true(profile.spend_points(2))
-		assert_eq(profile.get_points(), 2)
+		assert_eq(2, profile.get_points())
 		assert_false(profile.spend_points(3))
-		assert_eq(profile.get_points(), 2)
+		assert_eq(2, profile.get_points())
+
+	func test_singal():
+		assert_has_signal(profile, "on_points_changed")
+		watch_signals(profile)
+		profile.add_points(1)
+		assert_signal_emitted_with_parameters(profile, "on_points_changed", [0, 1])
+		profile.add_points(5)
+		assert_signal_emitted_with_parameters(profile, "on_points_changed", [1, 6])
+
+class TestDiceSets:
+	extends GutTest
+	
+	var profileScript = load('res://scripts/services/profile_service.gd')		
+	var profile
+
+	func before_each():
+		profile = profileScript.new()
+
+	func test_initial_value_0():
+		assert_eq(0, profile.dice_sets.size())
+	
+	func test_add_dice_set():
+		profile.add_dice_set()
+		assert_eq(1, profile.dice_sets.size())
+		profile.add_dice_set()
+		assert_eq(2, profile.dice_sets.size())
+	
+	func test_count():
+		profile.dice_sets.append(1)
+		assert_eq(1, profile.count_dice_sets())
+		profile.dice_sets.append(1)
+		assert_eq(2, profile.count_dice_sets())
+	
+	func test_singal():
+		assert_has_signal(profile, "on_dice_set_bought")
+		watch_signals(profile)
+		profile.add_dice_set()
+		assert_signal_emitted_with_parameters(profile, "on_dice_set_bought", [1])
+		profile.add_dice_set()
+		assert_signal_emitted_with_parameters(profile, "on_dice_set_bought", [2])		
+	
