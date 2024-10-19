@@ -6,19 +6,14 @@ var rolling: bool = false
 var roll_duration: float = 1.0
 var roll_time: float = 1.0
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-signal on_max_rolled
-
-var numberText: Label
+var first_try: bool = true
+signal on_max_rolled(max:int, first_try:bool)
 
 func set_die(max: int) -> void:
 	max_value = max
 
-func _ready() -> void:
-	numberText = $Label
-
 func toggle(active:bool) -> void:
-	$Area2D/CollisionShape2D.disabled = !active
-	$Label.visible = active || value != 1
+	$Button.visible = active || value != 1
 
 func _process(delta: float) -> void:
 	if rolling:
@@ -30,18 +25,23 @@ func _process(delta: float) -> void:
 			check_for_max()
 	
 func roll() -> void:
-	if !rolling:
+	if !rolling and value != max_value:
 		rolling = true
 		roll_time = roll_duration
 
 func check_for_max():
 	if value == max_value:
-		on_max_rolled.emit()
-		numberText.add_theme_color_override("font_color", Color("00ff00"))
+		on_max_rolled.emit(max_value, first_try)
+		$Button.add_theme_color_override("font_color", Color("00ff00"))
+	else:
+		first_try = false
 
 func update_visuals():
-	numberText.text = str(value)
+	$Button.text = str(value)
 
 func _on_Box_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		roll()
+
+func _on_button_pressed() -> void:
+	roll()

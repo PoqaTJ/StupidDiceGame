@@ -15,6 +15,10 @@ run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ServiceLocator="*res://scripts/services/services.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")

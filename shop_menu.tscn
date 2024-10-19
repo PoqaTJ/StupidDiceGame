@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciffgv0523h7i"]
+
+[ext_resource type="Script" path="res://scripts/shop/shop_menu.gd" id="1_3aclf"]
+
+[node name="Shop Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -752.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3aclf")
+
+[node name="Background" type="ColorRect" parent="."]
+self_modulate = Color(0.596078, 0.6, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitlePanel" type="Panel" parent="Menu"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Menu/TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BodyPanel" type="VBoxContainer" parent="Menu"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PointsLabel" type="Label" parent="Menu/BodyPanel"]
+layout_mode = 2
+text = "Points: 0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/BodyPanel"]
+layout_mode = 2
+
+[node name="CountLabel" type="Label" parent="Menu/BodyPanel/HBoxContainer"]
+layout_mode = 2
+text = "Dice Sets: 000"
+
+[node name="BuyButton" type="Button" parent="Menu/BodyPanel/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Buy"
+
+[node name="CostLabel" type="Label" parent="Menu/BodyPanel/HBoxContainer"]
+layout_mode = 2
+text = "Price: 0"
+
+[connection signal="pressed" from="Menu/BodyPanel/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
