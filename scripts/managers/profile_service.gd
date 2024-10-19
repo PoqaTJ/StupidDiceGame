@@ -10,7 +10,7 @@ func get_points() -> int:
 
 func add_points(value:int) -> void:
 	if value <= 0:
-		print("ERROR: profile_manager.add_points() with non-positive value " + str(value))
+		print("ERROR: profile_service.add_points() with non-positive value " + str(value))
 	points += value
 	points = max(0, points)
 
