@@ -59,6 +59,13 @@ jobs:
             echo "Test results not found. Failing the build."
             exit 1
           fi
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: GUT tests
+          path: test_results.xml
+          reporter: jest-junit
       - name: Archive Test Results
         uses: actions/upload-artifact@v4.4.3
         if: always()
