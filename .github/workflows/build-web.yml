@@ -61,6 +61,7 @@ jobs:
 
   deploy:
     name: Deploy to Github Pages
+    if: github.ref == 'refs/heads/main'
     needs: export-web
     environment:
       name: github-pages
