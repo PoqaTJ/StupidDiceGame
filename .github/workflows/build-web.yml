@@ -60,12 +60,10 @@ jobs:
             exit 1
           fi
       - name: Test Report
-        uses: MichaelVoelkel/test-reporter@v1.8.0
+        uses: mikepenz/action-junit-report@v4.3.1
         if: success() || failure()
         with:
-          name: GUT tests
-          path: test_results.xml
-          reporter: jest-junit
+          report_paths: test_results.xml
       - name: Archive Test Results
         uses: actions/upload-artifact@v4.4.3
         if: always()
