@@ -60,7 +60,7 @@ jobs:
             exit 1
           fi
       - name: Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v1.9.1
         if: success() || failure()
         with:
           name: GUT tests
