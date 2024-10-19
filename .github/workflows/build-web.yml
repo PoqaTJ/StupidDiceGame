@@ -52,6 +52,11 @@ jobs:
       - name: Run Tests
         run: |
           godot -s addons/gut/gut_cmdln.gd -d --path "$PWD" --headless --verbose -- -glog=1 -gjunit_xml_file="test_results.xml" -gconfig res://test/test_config.json -gexit
+      - name: Archive Test Results
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: test-results
+          path: test_results.xml
 
   deploy:
     name: Deploy to Github Pages
