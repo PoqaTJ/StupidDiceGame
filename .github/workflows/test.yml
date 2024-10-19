@@ -1,0 +1,43 @@
+name: Test
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  checks: write
+  pull-requests: write
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Run Tests
+        run: |
+          godot --headless --import --path "$PWD"
+          godot -s addons/gut/gut_cmdln.gd -d --path "$PWD" --headless --verbose -- -glog=1 -gjunit_xml_file="test_results.xml" -gconfig res://test/test_config.json -gexit
+      - name: Test Report
+        uses: mikepenz/action-junit-report@v4.3.1
+        if: success() || failure()
+        with:
+          report_paths: test_results.xml
+      - name: Archive Test Results
+        uses: actions/upload-artifact@v4.4.3
+        if: always()
+        with:
+          name: test-results
+          path: test_results.xml
+          comments: true
