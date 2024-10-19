@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ciffgv0523h7i"]
 
-[ext_resource type="Script" path="res://scripts/dice/shop/shop_menu.gd" id="1_3aclf"]
+[ext_resource type="Script" path="res://scripts/shop/shop_menu.gd" id="1_3aclf"]
 
 [node name="Shop Menu" type="Control"]
 layout_mode = 3

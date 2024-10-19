@@ -1,23 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://841tgoqviom5"]
+[gd_scene load_steps=2 format=3 uid="uid://841tgoqviom5"]
 
 [ext_resource type="Script" path="res://scripts/dice/die.gd" id="1_5uf1b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jpe8c"]
-
-[node name="Die" type="Node2D"]
+[node name="Die" type="Control"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_5uf1b")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "1"
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5, 12)
-shape = SubResource("CircleShape2D_jpe8c")
-
-[node name="Node" type="Node" parent="."]
-
-[connection signal="input_event" from="Area2D" to="." method="_on_Box_input_event"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

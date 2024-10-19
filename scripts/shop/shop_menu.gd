@@ -14,7 +14,10 @@ func _process(delta: float) -> void:
 	pass
 
 func calculate_dice_set_cost() -> int:
-	return 0
+	var current = profile_service.count_dice_sets()
+	if current == 0:
+		return 0
+	return current + (current / 2)
 
 func redraw() -> void:
 	update_points()
@@ -22,6 +25,7 @@ func redraw() -> void:
 
 func on_points_updated(old:int, new:int) -> void:
 	update_points()
+	update_dice_sets()
 
 func on_dicesets_updated(count:int) -> void:
 	update_dice_sets()

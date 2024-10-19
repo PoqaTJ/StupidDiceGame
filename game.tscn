@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfharnqax6ghp"]
+[gd_scene load_steps=4 format=3 uid="uid://dfharnqax6ghp"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_1x6q5"]
 [ext_resource type="PackedScene" uid="uid://ciffgv0523h7i" path="res://shop_menu.tscn" id="1_8wfe5"]
+[ext_resource type="PackedScene" uid="uid://d1xjkh3rxat8e" path="res://dice_set_menu.tscn" id="2_d5pvg"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -9,6 +11,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1x6q5")
 
-[node name="Shop Menu" parent="." instance=ExtResource("1_8wfe5")]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129558, 0.129558, 0.129558, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1208.0
+offset_bottom = 800.0
+
+[node name="Shop Menu" parent="HBoxContainer" instance=ExtResource("1_8wfe5")]
+custom_minimum_size = Vector2(400, 800)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dice Set Menu" parent="HBoxContainer" instance=ExtResource("2_d5pvg")]
+custom_minimum_size = Vector2(400, 800)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 800)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "About"
+
+[node name="About Dice" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Buy dice sets in the Shop."
+
+[node name="About Dice2" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Click on dice to roll them."
+
+[node name="About Dice3" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Earn points when you roll the max."
+
+[node name="About Dice4" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Complete all 6 for a bunch of points!"
+
+[node name="About First Time" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Rolling max first try gets bonus points!"
+
+[node name="Thats All" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "That's all for now. Check back soon!"
+
+[connection signal="dice_set_completed" from="HBoxContainer/Dice Set Menu" to="." method="_on_dice_set_menu_dice_set_completed"]
+[connection signal="max_value_rolled" from="HBoxContainer/Dice Set Menu" to="." method="_on_dice_set_menu_max_value_rolled"]
