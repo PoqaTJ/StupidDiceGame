@@ -51,6 +51,7 @@ jobs:
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Run Tests
         run: |
+          godot --headless --editor --quit --path "$PWD"
           godot -s res://addons/gut/gut_cmdln.gd -d --path "$PWD" --headless -gtest=res://test/unit/test_profile_manager.gd -glog=1 -gexit
           #godot -s addons/gut/gut_cmdln.gd -d --path "$PWD" --headless --verbose -- -glog=1 -gjunit_xml_file="test_results.xml" -gconfig res://test/test_config.json -gexit
       - name: Verify Test Results
