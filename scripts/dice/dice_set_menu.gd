@@ -6,6 +6,7 @@ var dice_scene = preload("res://dice_set.tscn")
 
 signal max_value_rolled(id: int, index:int, max:int, first_try:bool)
 signal dice_set_completed()
+signal dice_set_reset(id: int)
 
 func _ready() -> void:
 	for i in range(profile_service.count_dice_sets()):
@@ -24,6 +25,7 @@ func add_dice_set(id:int, completed:int) -> void:
 	dice_set.current_index = completed
 	dice_set.die_maxxed.connect(on_dice_set_max_value_rolled)
 	dice_set.dice_set_completed.connect(on_dice_set_completed)
+	dice_set.dice_set_reset.connect(on_dice_set_reset)
 	dice_set.update_current_die()
 	$VBoxContainer.add_child(dice_set)
 
@@ -32,3 +34,6 @@ func on_dice_set_max_value_rolled(id: int, index:int, max:int, first_try:bool) -
 	
 func on_dice_set_completed() -> void:
 	dice_set_completed.emit()
+	
+func on_dice_set_reset(id:int) -> void:
+	dice_set_reset.emit(id)

@@ -5,6 +5,7 @@ var profile: Profile
 
 signal on_dice_set_bought(count)
 signal on_points_changed(old, new)
+signal on_chips_changed(old, new)
 
 func load_from_save():
 	print("Loading!")
@@ -32,7 +33,6 @@ func add_points(value:int) -> void:
 	profile.points += value
 	profile.points = max(0, profile.points)
 	on_points_changed.emit(current_points, profile.points)
-	save_to_file()
 
 func has_points(value:int) -> bool:
 	return profile.points >= value
@@ -45,11 +45,33 @@ func spend_points(value:int) -> bool:
 	on_points_changed.emit(current_points, profile.points)
 	return true
 
+func get_chips() -> int:
+	return profile.chips
+
+func add_chips(value:int) -> void:
+	var current_chips = profile.chips
+	if value <= 0:
+		print("ERROR: profile_service.add_chips() with non-positive value " + str(value))
+	profile.chips += value
+	profile.chips = max(0, profile.chips)
+	on_chips_changed.emit(current_chips, profile.chips)
+
+func has_chips(value:int) -> bool:
+	return profile.chips >= value
+
+func spend_chips(value:int) -> bool:
+	var current_chips = profile.chips
+	if !has_chips(value):
+		return false
+	profile.chips -= value
+	on_chips_changed.emit(current_chips, profile.chips)
+	return true
+
 func count_dice_sets() -> int:
 	return profile.dice_sets.size()
 
 func set_dice_set_progress(index:int, completed:int) -> void:
-	profile.dice_sets[index] = completed	
+	profile.dice_sets[index] = completed
 
 func add_dice_set() -> void:
 	profile.dice_sets.append(0)

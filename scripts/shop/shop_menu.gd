@@ -7,6 +7,7 @@ func _ready() -> void:
 	profile_service = ServiceLocator.profile_service
 	profile_service.on_points_changed.connect(on_points_updated)
 	profile_service.on_dice_set_bought.connect(on_dicesets_updated)
+	profile_service.on_chips_changed.connect(on_chips_updated)
 	redraw()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,12 +27,18 @@ func redraw() -> void:
 func on_points_updated(old:int, new:int) -> void:
 	update_points()
 	update_dice_sets()
+	
+func on_chips_updated(old:int, new:int) -> void:
+	update_chips()
 
 func on_dicesets_updated(count:int) -> void:
 	update_dice_sets()
 
 func update_points() -> void:
 	$Menu/BodyPanel/PointsLabel.text = "Points: " + str(profile_service.get_points())
+
+func update_chips() -> void:
+	$Menu/BodyPanel/ChipsLabel.text = "Chips: " + str(profile_service.get_chips())
 
 func update_dice_sets() -> void:
 	var next_dice_set_cost = calculate_dice_set_cost()
@@ -46,5 +53,5 @@ func buy_dice_set() -> void:
 	profile_service.spend_points(next_dice_set_cost)
 	profile_service.add_dice_set()
 
-func _on_buy_button_pressed() -> void:
+func on_buy_button_pressed() -> void:
 	buy_dice_set()

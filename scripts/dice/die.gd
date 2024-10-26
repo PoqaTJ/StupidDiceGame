@@ -39,7 +39,14 @@ func check_for_max():
 func update_visuals():
 	if value == max_value and !rolling:
 		$Button.add_theme_color_override("font_color", Color("00ff00"))
+	else:
+		$Button.add_theme_color_override("font_color", Color("ffffff"))
 	$Button.text = str(value)
+
+func reset():
+	value = 1
+	rolling = false
+	first_try = true
 
 func _on_Box_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

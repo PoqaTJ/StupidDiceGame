@@ -72,5 +72,6 @@ text = "Rolling max first try gets bonus points!"
 layout_mode = 2
 text = "That's all for now. Check back soon!"
 
-[connection signal="dice_set_completed" from="HBoxContainer/Dice Set Menu" to="." method="_on_dice_set_menu_dice_set_completed"]
-[connection signal="max_value_rolled" from="HBoxContainer/Dice Set Menu" to="." method="_on_dice_set_menu_max_value_rolled"]
+[connection signal="dice_set_completed" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_menu_dice_set_completed"]
+[connection signal="dice_set_reset" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_reset"]
+[connection signal="max_value_rolled" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_menu_max_value_rolled"]
