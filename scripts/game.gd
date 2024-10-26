@@ -16,5 +16,6 @@ func get_points_for_max_reached() -> int:
 func _on_dice_set_menu_dice_set_completed() -> void:
 	profile_service.add_points(get_points_for_max_reached())
 
-func _on_dice_set_menu_max_value_rolled(max: int, first_try: bool) -> void:
+func _on_dice_set_menu_max_value_rolled(index: int, completed: int, max: int, first_try: bool) -> void:
 	profile_service.add_points(get_points_for_max_roll(max, first_try))
+	profile_service.set_dice_set_progress(index, completed)

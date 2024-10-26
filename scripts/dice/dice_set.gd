@@ -1,9 +1,10 @@
 extends Control
 
+var id:int
 var dice:Array
 var current_index:int = 0
 
-signal die_maxxed(max:int, first_try:bool)
+signal die_maxxed(index:int, completed: int, max:int, first_try:bool)
 signal dice_set_completed()
 
 # Called when the node enters the scene tree for the first time.
@@ -25,9 +26,10 @@ func initDie(num:int) -> void:
 func update_current_die() -> void:
 	for i in range(dice.size()):
 		dice[i].toggle(i == current_index)
+		dice[i].update_visuals()
 
 func on_die_max_roll(max:int, first_try:bool) -> void:
-	die_maxxed.emit(max, first_try)
+	die_maxxed.emit(id, current_index + 1, max, first_try)
 	increment_max()
 	if current_index > dice.size():
 		dice_set_completed.emit();
