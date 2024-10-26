@@ -2,6 +2,8 @@ extends Control
 
 var profile_service : ProfileService
 
+signal roll(method:Constants.RollerMethod)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	profile_service = ServiceLocator.profile_service
@@ -22,6 +24,7 @@ func calculate_dice_set_cost() -> int:
 
 func redraw() -> void:
 	update_points()
+	update_chips()
 	update_dice_sets()
 
 func on_points_updated(old:int, new:int) -> void:
@@ -55,3 +58,6 @@ func buy_dice_set() -> void:
 
 func on_buy_button_pressed() -> void:
 	buy_dice_set()
+	
+func on_roll(method:Constants.RollerMethod) -> void:
+	roll.emit(method)

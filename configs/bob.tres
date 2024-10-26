@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RollerConfig" load_steps=2 format=3 uid="uid://chk1mf08kk75o"]
+
+[ext_resource type="Script" path="res://resources/roller_config.gd" id="1_m0a67"]
+
+[resource]
+script = ExtResource("1_m0a67")
+name = "Bob"
+method = 3
+time = 1.0

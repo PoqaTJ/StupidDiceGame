@@ -77,3 +77,10 @@ func add_dice_set() -> void:
 	profile.dice_sets.append(0)
 	on_dice_set_bought.emit(count_dice_sets())
 	save_to_file()
+	
+func get_roller_level(id:int) -> int:
+	return profile.rollers[id]
+
+func increment_roller_level(id:int) -> void:
+	profile.rollers[id] = profile.rollers[id] + 1
+	save_to_file()

@@ -24,7 +24,7 @@ color = Color(0.129558, 0.129558, 0.129558, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 1208.0
+offset_right = 1152.0
 offset_bottom = 800.0
 
 [node name="Shop Menu" parent="HBoxContainer" instance=ExtResource("1_8wfe5")]
@@ -33,12 +33,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Dice Set Menu" parent="HBoxContainer" instance=ExtResource("2_d5pvg")]
-custom_minimum_size = Vector2(400, 800)
+custom_minimum_size = Vector2(350, 800)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(400, 800)
+custom_minimum_size = Vector2(380, 800)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
@@ -47,6 +47,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "About"
+horizontal_alignment = 1
+
+[node name="Blank2" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="About Dice" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -60,18 +64,48 @@ text = "Click on dice to roll them."
 layout_mode = 2
 text = "Earn points when you roll the max."
 
-[node name="About Dice4" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Complete all 6 for a bunch of points!"
-
 [node name="About First Time" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Rolling max first try gets bonus points!"
+
+[node name="Blank" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="About Dice4" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Complete all 6 for a chip!"
+
+[node name="About Dice5" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spend chips on people to roll for you."
+
+[node name="Blank3" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Thats All" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "That's all for now. Check back soon!"
 
+[node name="Blank4" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Blank5" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESET EVERYTHING"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Reset?"
+initial_position = 2
+ok_button_text = "Reset"
+dialog_text = "There is no benefit to resetting at this time. It just allows you to play from the beginning."
+
+[connection signal="roll" from="HBoxContainer/Shop Menu" to="." method="roll"]
 [connection signal="dice_set_completed" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_menu_dice_set_completed"]
 [connection signal="dice_set_reset" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_reset"]
 [connection signal="max_value_rolled" from="HBoxContainer/Dice Set Menu" to="." method="on_dice_set_menu_max_value_rolled"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Button" to="." method="reset"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="cancel_reset"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="really_reset"]
