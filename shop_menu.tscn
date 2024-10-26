@@ -70,4 +70,8 @@ text = "Buy"
 layout_mode = 2
 text = "Price: 0"
 
-[connection signal="pressed" from="Menu/BodyPanel/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[node name="ChipsLabel" type="Label" parent="Menu/BodyPanel"]
+layout_mode = 2
+text = "Chips: 0"
+
+[connection signal="pressed" from="Menu/BodyPanel/HBoxContainer/BuyButton" to="." method="on_buy_button_pressed"]
