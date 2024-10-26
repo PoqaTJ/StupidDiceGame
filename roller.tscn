@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbmnmwj2vstpb"]
+
+[ext_resource type="Script" path="res://scripts/rollers/roller.gd" id="1_7chro"]
+
+[node name="Roller" type="HBoxContainer"]
+script = ExtResource("1_7chro")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+show_percentage = false
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+text = "Name"
+
+[node name="Desc" type="Label" parent="."]
+layout_mode = 2
+text = "Rolls ???"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Buy"
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 2
+text = "Level: 0"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="press_buy"]

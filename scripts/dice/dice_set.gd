@@ -1,4 +1,5 @@
 extends Control
+class_name DiceSet
 
 var id:int
 var dice:Array
@@ -60,3 +61,15 @@ func reset() -> void:
 func increment_max() -> void:
 	current_index += 1
 	update_current_die()
+	
+func can_be_rolled() -> bool:
+	if resetting:
+		return false
+	if current_index >= dice.size():
+		return false
+	if dice[current_index].rolling:
+		return false
+	return true
+
+func roll() -> void:
+	dice[current_index].roll()

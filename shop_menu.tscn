@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciffgv0523h7i"]
+[gd_scene load_steps=8 format=3 uid="uid://ciffgv0523h7i"]
 
 [ext_resource type="Script" path="res://scripts/shop/shop_menu.gd" id="1_3aclf"]
+[ext_resource type="PackedScene" uid="uid://cbmnmwj2vstpb" path="res://roller.tscn" id="2_8bmb8"]
+[ext_resource type="Resource" uid="uid://dxdhe2hfg3xkh" path="res://configs/ba.tres" id="3_yuqr3"]
+[ext_resource type="Resource" uid="uid://bvatwq3ein76w" path="res://configs/brian.tres" id="4_waxl0"]
+[ext_resource type="Resource" uid="uid://chk1mf08kk75o" path="res://configs/bob.tres" id="5_sox1c"]
+[ext_resource type="Resource" uid="uid://bjqpb43ssnpe8" path="res://configs/dave.tres" id="6_53mxs"]
+[ext_resource type="Resource" uid="uid://dn5ihxlupxxa6" path="res://configs/sara.tres" id="7_lw3c8"]
 
 [node name="Shop Menu" type="Control"]
 layout_mode = 3
@@ -74,4 +80,33 @@ text = "Price: 0"
 layout_mode = 2
 text = "Chips: 0"
 
+[node name="Roller - BA" parent="Menu/BodyPanel" instance=ExtResource("2_8bmb8")]
+layout_mode = 2
+config = ExtResource("3_yuqr3")
+
+[node name="Roller - Brian" parent="Menu/BodyPanel" instance=ExtResource("2_8bmb8")]
+layout_mode = 2
+config = ExtResource("4_waxl0")
+id = 1
+
+[node name="Roller - Bob" parent="Menu/BodyPanel" instance=ExtResource("2_8bmb8")]
+layout_mode = 2
+config = ExtResource("5_sox1c")
+id = 2
+
+[node name="Roller - Dave" parent="Menu/BodyPanel" instance=ExtResource("2_8bmb8")]
+layout_mode = 2
+config = ExtResource("6_53mxs")
+id = 3
+
+[node name="Roller - Sara" parent="Menu/BodyPanel" instance=ExtResource("2_8bmb8")]
+layout_mode = 2
+config = ExtResource("7_lw3c8")
+id = 4
+
 [connection signal="pressed" from="Menu/BodyPanel/HBoxContainer/BuyButton" to="." method="on_buy_button_pressed"]
+[connection signal="on_roll" from="Menu/BodyPanel/Roller - BA" to="." method="on_roll"]
+[connection signal="on_roll" from="Menu/BodyPanel/Roller - Brian" to="." method="on_roll"]
+[connection signal="on_roll" from="Menu/BodyPanel/Roller - Bob" to="." method="on_roll"]
+[connection signal="on_roll" from="Menu/BodyPanel/Roller - Dave" to="." method="on_roll"]
+[connection signal="on_roll" from="Menu/BodyPanel/Roller - Sara" to="." method="on_roll"]
