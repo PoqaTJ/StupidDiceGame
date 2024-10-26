@@ -25,6 +25,8 @@ func initDie(num:int) -> void:
 
 func update_current_die() -> void:
 	for i in range(dice.size()):
+		if i < current_index:
+			dice[i].value = dice[i].max_value
 		dice[i].toggle(i == current_index)
 		dice[i].update_visuals()
 
