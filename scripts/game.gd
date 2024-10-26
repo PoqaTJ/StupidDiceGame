@@ -10,11 +10,11 @@ func get_points_for_max_roll(value:int, first_try:bool) -> int:
 		return value
 	return value / 4
 
-func get_points_for_max_reached() -> int:
-	return 25
+func get_chips_for_max_reached() -> int:
+	return 1
 
 func on_dice_set_menu_dice_set_completed() -> void:
-	profile_service.add_points(get_points_for_max_reached())
+	profile_service.add_chips(get_chips_for_max_reached())
 	profile_service.save_to_file()
 
 func on_dice_set_menu_max_value_rolled(index: int, completed: int, max: int, first_try: bool) -> void:

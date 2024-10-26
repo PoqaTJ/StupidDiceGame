@@ -40,7 +40,7 @@ func update_current_die() -> void:
 func on_die_max_roll(max:int, first_try:bool) -> void:
 	die_maxxed.emit(id, current_index + 1, max, first_try)
 	increment_max()
-	if current_index > dice.size():
+	if current_index >= dice.size():
 		dice_set_completed.emit();
 
 func reset_after_wait():
