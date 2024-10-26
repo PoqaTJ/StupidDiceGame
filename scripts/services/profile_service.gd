@@ -1,41 +1,43 @@
 extends Node
 class_name ProfileService
 
-var points:int = 0
-
-var dice_sets:Array = [] # array of ints, which is index of dice set's current max roll, default 0
+var profile: Profile
 
 signal on_dice_set_bought(count)
 signal on_points_changed(old, new)
+signal on_profile_load(profile)
 
 func _ready() -> void:
 	pass
 
+func init(p: Profile):
+	profile = p
+
 func get_points() -> int:
-	return points
+	return profile.points
 
 func add_points(value:int) -> void:
-	var current_points = points
+	var current_points = profile.points
 	if value <= 0:
 		print("ERROR: profile_service.add_points() with non-positive value " + str(value))
-	points += value
-	points = max(0, points)
-	on_points_changed.emit(current_points, points)
+	profile.points += value
+	profile.points = max(0, profile.points)
+	on_points_changed.emit(current_points, profile.points)
 
 func has_points(value:int) -> bool:
-	return points >= value
+	return profile.points >= value
 
 func spend_points(value:int) -> bool:
-	var current_points = points
+	var current_points = profile.points
 	if !has_points(value):
 		return false
-	points -= value
-	on_points_changed.emit(current_points, points)
+	profile.points -= value
+	on_points_changed.emit(current_points, profile.points)
 	return true
 
 func count_dice_sets() -> int:
-	return dice_sets.size()
+	return profile.dice_sets.size()
 	
 func add_dice_set() -> void:
-	dice_sets.append(0)
+	profile.dice_sets.append(0)
 	on_dice_set_bought.emit(count_dice_sets())

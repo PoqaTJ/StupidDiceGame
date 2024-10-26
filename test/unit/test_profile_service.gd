@@ -8,17 +8,18 @@ class TestPoints:
 
 	func before_each():
 		profile = profileScript.new()
+		profile.init(Profile.new())
 	
 	func test_initial_value_0():
-		assert_true(profile.points == 0)
+		assert_true(profile.profile.points == 0)
 	
 	func test_get():
-		assert_true(profile.get_points() ==  profile.points)
+		assert_true(profile.get_points() ==  profile.profile.points)
 		
 	func test_after_set():
-		profile.points = 10
+		profile.profile.points = 10
 		assert_true(profile.get_points() == 10)
-		assert_true(profile.get_points() ==  profile.points)
+		assert_true(profile.get_points() ==  profile.profile.points)
 	
 	func test_add():
 		assert_eq(0, profile.get_points())
@@ -66,20 +67,21 @@ class TestDiceSets:
 
 	func before_each():
 		profile = profileScript.new()
+		profile.init(Profile.new())
 
 	func test_initial_value_0():
-		assert_eq(0, profile.dice_sets.size())
+		assert_eq(0, profile.profile.dice_sets.size())
 	
 	func test_add_dice_set():
 		profile.add_dice_set()
-		assert_eq(1, profile.dice_sets.size())
+		assert_eq(1, profile.profile.dice_sets.size())
 		profile.add_dice_set()
-		assert_eq(2, profile.dice_sets.size())
+		assert_eq(2, profile.profile.dice_sets.size())
 	
 	func test_count():
-		profile.dice_sets.append(1)
+		profile.profile.dice_sets.append(1)
 		assert_eq(1, profile.count_dice_sets())
-		profile.dice_sets.append(1)
+		profile.profile.dice_sets.append(1)
 		assert_eq(2, profile.count_dice_sets())
 	
 	func test_singal():
